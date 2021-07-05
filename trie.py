@@ -25,3 +25,4 @@ class Trie:
             cur_node = cur_node.child[char]
         if cur_node.data is not None:
             return True
+        return False
