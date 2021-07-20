@@ -7,6 +7,8 @@ prefix sums in a table of numbers.
 class FenwickTree:
     def __init__(self, array):
         self.array = array
+        for i in range(len(array)):
+            self.update(i, array[i])
 
     def update(self, idx, value):
         while idx < len(self.array):
