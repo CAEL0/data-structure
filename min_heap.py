@@ -5,50 +5,52 @@ tree that satisfies the heap property: in a max heap, for any given node C, if P
 key of C. The node at the "top" of the heap (with no parents) is called the root node.
 """
 
-import sys
 
-array = [0]
-
-while True:
-    operation = int(sys.stdin.readline())
-    idx = len(array)
-
-    if operation:
-        array.append(operation)
-        while True:
-            if idx == 1:
-                break
-            if array[idx] < array[idx // 2]:
-                array[idx], array[idx // 2] = array[idx // 2], array[idx]
-                idx //= 2
+class MinHeap:
+    array = [0]
+    
+    def push(self, n: int) -> None:
+        i = len(self.array)
+        self.array.append(n)
+        while i > 1:
+            if self.array[i] < self.array[i // 2]:
+                self.array[i], self.array[i // 2] = self.array[i // 2], self.array[i]
+                i //= 2
             else:
                 break
-
-    else:
-        if len(array) == 1:
-            print(0)
-        elif len(array) == 2:
-            print(array.pop())
-        else:
-            print(array[1])
-            array[1] = array.pop()
-            idx = 1
-            while True:
-                if len(array) <= 2 * idx:
-                    break
-                if len(array) == 2 * idx + 1:
-                    if array[idx] > array[2 * idx]:
-                        array[idx], array[2 * idx] = array[2 * idx], array[idx]
-                    break
-                if (array[idx] <= array[2 * idx]) and (array[idx] <= array[2 * idx + 1]):
-                    break
-                if array[idx] > array[2 * idx]:
-                    if array[2 * idx] > array[2 * idx + 1]:
-                        array[idx], array[2 * idx + 1] = array[2 * idx + 1], array[idx]
-                        idx = 2 * idx + 1
-                    else:
-                        array[idx], array[2 * idx] = array[2 * idx], array[idx]
-                        idx *= 2
+    
+    def pop(self) -> int:
+        if len(self.array) == 1:
+            return 0
+        
+        if len(self.array) == 2:
+            return self.array.pop()
+        
+        res = self.array[1]
+        
+        self.array[1] = self.array.pop()
+        i = 1
+        while True:
+            if len(self.array) <= 2 * i:
+                break
+            
+            if len(self.array) == 2 * i + 1:
+                if self.array[i] > self.array[2 * i]:
+                    self.array[i], self.array[2 * i] = self.array[2 * i], self.array[i]
+                break
+            
+            if (self.array[i] <= self.array[2 * i]) and (self.array[i] <= self.array[2 * i + 1]):
+                break
+            
+            if self.array[i] > self.array[2 * i]:
+                if self.array[2 * i] > self.array[2 * i + 1]:
+                    self.array[i], self.array[2 * i + 1] = self.array[2 * i + 1], self.array[i]
+                    i = 2 * i + 1
                 else:
-                    array[idx], array[2 * idx + 1] = array[2 * idx + 1], array[idx]
-                    idx = 2 * idx + 1
+                    self.array[i], self.array[2 * i] = self.array[2 * i], self.array[i]
+                    i *= 2
+            else:
+                self.array[i], self.array[2 * i + 1] = self.array[2 * i + 1], self.array[i]
+                i = 2 * i + 1
+        
+        return res
