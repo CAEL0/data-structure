@@ -21,17 +21,14 @@ def partial_sum(a: int, b: int, idx=1) -> int:
     mid = start + length // 2
 
     if lazy[idx]:
+        tree[idx] += lazy[idx] * length
         if length > 2:
-            tree[idx] += lazy[idx] * length
             lazy[2 * idx] += lazy[idx]
             lazy[2 * idx + 1] += lazy[idx]
-            lazy[idx] = 0
-
         elif length == 2:
-            tree[idx] += lazy[idx] * 2
             tree[2 * idx] += lazy[idx]
             tree[2 * idx + 1] += lazy[idx]
-            lazy[idx] = 0
+        lazy[idx] = 0
 
     if (a == start) and (b == start + length - 1):
         return tree[idx] + length * lazy[idx]
