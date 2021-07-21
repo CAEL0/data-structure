@@ -10,19 +10,20 @@ log n + k), k being the number of retrieved intervals or segments.
 import sys
 from math import log2, ceil
 
-N = int(sys.stdin.readline())
-H = ceil(log2(N))
-tree = [0] * 2 ** (H + 1)
+n = int(sys.stdin.readline())
+height = ceil(log2(n))
+tree = [0] * 2 ** (height + 1)
 
-for i in range(N):
-    tree[2 ** H + i] = int(sys.stdin.readline())
+for i in range(n):
+    tree[2 ** height + i] = int(sys.stdin.readline())
 
-for h in range(H - 1, -1, -1):
+for h in range(height - 1, -1, -1):
     for i in range(2 ** h, 2 ** (h + 1)):
         tree[i] = tree[2 * i] + tree[2 * i + 1]
 
 
 def partial_sum(a: int, b: int) -> int:
+    res = 0
     a += 2 ** height - 1
     b += 2 ** height - 1
     while a <= b:
@@ -39,7 +40,7 @@ def partial_sum(a: int, b: int) -> int:
 
 
 def change(k: int, c: int) -> None:
-    idx = 2 ** H + k - 1
+    idx = 2 ** height + k - 1
     gap = tree[idx] - c
     while idx >= 1:
         tree[idx] -= gap
