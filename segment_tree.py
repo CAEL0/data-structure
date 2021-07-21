@@ -22,24 +22,20 @@ for h in range(H - 1, -1, -1):
         tree[i] = tree[2 * i] + tree[2 * i + 1]
 
 
-def partial_sum(a: int, b: int, idx=1) -> int:
-    level = 2 ** int(log2(idx))
-    length = (2 ** H) // level
-    if length == 1:
-        return tree[idx]
+def partial_sum(a: int, b: int) -> int:
+    a += 2 ** height - 1
+    b += 2 ** height - 1
+    while a <= b:
+        if a % 2:
+            res += tree[a]
+            a += 1
+        if b % 2 == 0:
+            res += tree[b]
+            b -= 1
+        a //= 2
+        b //= 2
 
-    start = (idx % level) * length
-    mid = start + length // 2
-    if (a == start) and (b == start + length - 1):
-        return tree[idx]
-
-    if b < mid:
-        return partial_sum(a, b, 2 * idx)
-
-    if mid <= a:
-        return partial_sum(a, b, 2 * idx + 1)
-
-    return partial_sum(a, mid - 1, 2 * idx) + partial_sum(mid, b, 2 * idx + 1)
+    return res
 
 
 def change(k: int, c: int) -> None:
