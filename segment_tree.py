@@ -39,7 +39,7 @@ def partial_sum(a: int, b: int) -> int:
     return res
 
 
-def change(k: int, c: int) -> None:
+def update(k: int, c: int) -> None:
     idx = 2 ** height + k - 1
     gap = tree[idx] - c
     while idx >= 1:
