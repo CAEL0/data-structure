@@ -22,7 +22,7 @@ for h in range(height - 1, -1, -1):
         tree[i] = tree[2 * i] + tree[2 * i + 1]
 
 
-def partial_sum(a: int, b: int) -> int:
+def summation(a: int, b: int) -> int:
     res = 0
     a += 2 ** height - 1
     b += 2 ** height - 1
