@@ -14,66 +14,74 @@ for h in range(height - 1, -1, -1):
         tree[i] = tree[2 * i] + tree[2 * i + 1]
 
 
-def partial_sum(a: int, b: int, idx=1) -> int:
-    level = 2 ** int(log2(idx))
-    length = (2 ** height) // level
-    start = (idx % level) * length
-    mid = start + length // 2
+def summation(a: int, b: int) -> int:
+    res = 0
+    queue = [(a, b, 1)]
+    while queue:
+        a, b, idx = queue.pop()
+        level = 2 ** int(log2(idx))
+        length = (2 ** height) // level
+        start = (idx % level) * length
+        mid = start + length // 2
 
-    if lazy[idx]:
-        tree[idx] += lazy[idx] * length
-        if length > 2:
-            lazy[2 * idx] += lazy[idx]
-            lazy[2 * idx + 1] += lazy[idx]
-        elif length == 2:
-            tree[2 * idx] += lazy[idx]
-            tree[2 * idx + 1] += lazy[idx]
-        lazy[idx] = 0
+        if lazy[idx]:
+            if length == 2:
+                tree[2 * idx] += lazy[idx]
+                tree[2 * idx + 1] += lazy[idx]
+            else:
+                lazy[2 * idx] += lazy[idx]
+                lazy[2 * idx + 1] += lazy[idx]
 
-    if (a == start) and (b == start + length - 1):
-        return tree[idx] + length * lazy[idx]
+            tree[idx] += lazy[idx] * length
+            lazy[idx] = 0
 
-    if b < mid:
-        return partial_sum(a, b, 2 * idx)
-
-    if mid <= a:
-        return partial_sum(a, b, 2 * idx + 1)
-
-    return partial_sum(a, mid - 1, 2 * idx) + partial_sum(mid, b, 2 * idx + 1)
-
-
-def update(a: int, b: int, c: int, idx=1) -> None:
-    level = 2 ** int(log2(idx))
-    length = (2 ** height) // level
-    start = (idx % level) * length
-    mid = start + length // 2
-
-    if lazy[idx]:
-        tree[idx] += lazy[idx] * length
-        if length > 2:
-            lazy[2 * idx] += lazy[idx]
-            lazy[2 * idx + 1] += lazy[idx]
-        elif length == 2:
-            tree[2 * idx] += lazy[idx]
-            tree[2 * idx + 1] += lazy[idx]
-        lazy[idx] = 0
-
-    if (a == start) and (b == start + length - 1):
-        if length == 1:
-            tree[idx] += c
+        if (a == start) and (b - a + 1 == length):
+            res += tree[idx]
+        elif b < mid:
+            queue.append((a, b, 2 * idx))
+        elif mid <= a:
+            queue.append((a, b, 2 * idx + 1))
         else:
-            lazy[idx] = c
-        idx_ = idx
-        while idx_ > 1:
-            idx_ //= 2
-            tree[idx_] += length * c
+            queue.append((a, mid - 1, 2 * idx))
+            queue.append((mid, b, 2 * idx + 1))
 
-    elif b < mid:
-        update(a, b, c, 2 * idx)
+    return res
 
-    elif mid <= a:
-        update(a, b, c, 2 * idx + 1)
 
-    else:
-        update(a, mid - 1, c, 2 * idx)
-        update(mid, b, c, 2 * idx + 1)
+def update(a: int, b: int, c: int) -> None:
+    queue = [(a, b, 1)]
+    while queue:
+        a, b, idx = queue.pop()
+        level = 2 ** int(log2(idx))
+        length = (2 ** height) // level
+        start = (idx % level) * length
+        mid = start + length // 2
+
+        if lazy[idx]:
+            if length == 2:
+                tree[2 * idx] += lazy[idx]
+                tree[2 * idx + 1] += lazy[idx]
+            else:
+                lazy[2 * idx] += lazy[idx]
+                lazy[2 * idx + 1] += lazy[idx]
+
+            tree[idx] += lazy[idx] * length
+            lazy[idx] = 0
+
+        if (a == start) and (b - a + 1 == length):
+            if length == 1:
+                tree[idx] += c
+            else:
+                lazy[idx] = c
+
+            while idx > 1:
+                idx //= 2
+                tree[idx] += length * c
+
+        elif b < mid:
+            queue.append((a, b, 2 * idx))
+        elif mid <= a:
+            queue.append((a, b, 2 * idx + 1))
+        else:
+            queue.append((a, mid - 1, 2 * idx))
+            queue.append((mid, b, 2 * idx + 1))
