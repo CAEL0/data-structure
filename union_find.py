@@ -6,7 +6,9 @@ union), and finding a representative member of a set. The last operation allows 
 elements are in the same or different sets.
 """
 
-n = int(input())
+import sys
+
+n = int(sys.stdin.readline())
 parent = [i for i in range(n)]
 
 
