@@ -9,7 +9,7 @@ key of C. The node at the "top" of the heap (with no parents) is called the root
 class MinHeap:
     array = [0]
     
-    def push(self, n: int) -> None:
+    def push(self, n):
         i = len(self.array)
         self.array.append(n)
         while i > 1:
@@ -19,7 +19,7 @@ class MinHeap:
             else:
                 break
     
-    def pop(self) -> int:
+    def pop(self):
         if len(self.array) == 1:
             return 0
         
