@@ -22,7 +22,7 @@ for h in range(height - 1, -1, -1):
         tree[i] = tree[2 * i] + tree[2 * i + 1]
 
 
-def summation(a: int, b: int) -> int:
+def summation(a, b):
     res = 0
     a += 2 ** height - 1
     b += 2 ** height - 1
@@ -39,7 +39,7 @@ def summation(a: int, b: int) -> int:
     return res
 
 
-def update(k: int, c: int) -> None:
+def update(k, c):
     idx = 2 ** height + k - 1
     gap = tree[idx] - c
     while idx >= 1:
