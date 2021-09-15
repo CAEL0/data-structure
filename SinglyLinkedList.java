@@ -11,12 +11,14 @@ public class SinglyLinkedList<E> {
 		public Node<E> getNext() { return next; }
 		public void setNext(Node<E> n) { next = n; }
 	}
+	
 	// Variables
 	private Node<E> head = null;
 	private Node<E> tail = null;
 	private int size = 0;
 	public SinglyLinkedList() { }
 	public int size() { return size; }
+	
 	// Methods
 	public boolean isEmpty() { return size == 0; }
 	public E first() {
