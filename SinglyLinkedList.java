@@ -1,5 +1,5 @@
 public class SinglyLinkedList<E> {
-	// Node Class
+	// Node Classa
 	private static class Node<E> {
 		private E element;
 		private Node<E> next;
