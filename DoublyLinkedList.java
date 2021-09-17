@@ -1,5 +1,5 @@
 public class DoublyLinkedList<E> {
-	// Node Class
+    // Node Class
 	private static class Node<E> {
 		private E element;
 		private Node<E> next;
