@@ -1,7 +1,7 @@
 public class DoublyLinkedList<E> {
     // Node Class
-	private static class Node<E> {
-		private E element;
+    private static class Node<E> {
+        private E element;
 		private Node<E> next;
 		private Node<E> prev;
 		public Node(E e, Node<E> n, Node<E> p) {
