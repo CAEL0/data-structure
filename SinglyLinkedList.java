@@ -41,29 +41,33 @@ public class SinglyLinkedList<E> {
     }
 
     public E first() {
-        if (isEmpty())
+        if (isEmpty()) {
             return null;
+        }
         return head.getElement();
     }
 
     public E last() {
-        if (isEmpty())
+        if (isEmpty()) {
             return null;
+        }
         return tail.getElement();
     }
 
     public void appendLeft(E e) {
         Node<E> node = new Node<E>(e, head);
-        if (isEmpty())
+        if (isEmpty()) {
             tail = node;
+        }
         head = node;
         size++;
     }
 
     public void append(E e) {
         Node<E> node = new Node<E>(e, null);
-        if (isEmpty())
+        if (isEmpty()) {
             head = node;
+        }
         else {
             Node<E> tar = head;
             while (tar.getNext() != null) {
@@ -100,8 +104,9 @@ public class SinglyLinkedList<E> {
             if (tar == n) {
                 Node<E> node = new Node<E>(e, tar.getNext());
                 tar.setNext(node);
-                if (node.getNext() == null)
+                if (node.getNext() == null) {
                     tail = node;
+                }
                 size++;
                 break;
             }
@@ -115,8 +120,9 @@ public class SinglyLinkedList<E> {
             if (tar == n) {
                 if (tar.getNext() != null) {
                     tar.setNext(tar.getNext().getNext());
-                    if (tar.getNext() == null)
+                    if (tar.getNext() == null) {
                         tail = tar;
+                    }
                     size--;
                 }
                 break;
