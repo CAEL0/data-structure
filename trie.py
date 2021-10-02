@@ -9,7 +9,7 @@ class Trie:
     def __init__(self):
         self.head = Node(None)
 
-    def insert(self, string: str) -> None:
+    def insert(self, string):
         cur_node = self.head
         for char in string:
             if char not in cur_node.child:
@@ -17,7 +17,7 @@ class Trie:
             cur_node = cur_node.child[char]
         cur_node.data = string
 
-    def search(self, string: str) -> bool:
+    def search(self, string):
         cur_node = self.head
         for char in string:
             if char not in cur_node.child:
