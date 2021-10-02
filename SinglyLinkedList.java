@@ -26,15 +26,16 @@ public class SinglyLinkedList<E> {
     private Node<E> head = null;
     private Node<E> tail = null;
     private int size = 0;
-
+    
+    // Constructor
     public SinglyLinkedList() {
     }
 
+    // Methods
     public int size() {
         return size;
     }
 
-    // Methods
     public boolean isEmpty() {
         return size == 0;
     }
