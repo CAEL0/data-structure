@@ -1,7 +1,7 @@
 package queue;
 
 /** Implementation of the queue ADT using a fixed-length array. */
-public class ArrayQueue<E> implements Queue<E> {
+public class ArrayQueue<E> implements IQueue<E> {
     public static final int CAPACITY = 1000;    // default array capacity
     
     // instance variables
