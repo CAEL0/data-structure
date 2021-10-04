@@ -1,6 +1,6 @@
 package queue;
 
-public interface IQueue<E> {
+public interface Queue<E> {
     /** Returns the number of elements in the queue. */
     int size();
     
