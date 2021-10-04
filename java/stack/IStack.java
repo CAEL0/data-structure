@@ -1,6 +1,6 @@
 package stack;
 
-public interface Stack<E> {
+public interface IStack<E> {
     /**
      * Returns the number of elements in the stack.
      * @return number of elements in the stack
