@@ -2,7 +2,7 @@ package queue;
 import linked_list.SinglyLinkedList;
 
 /** Realization of a FIFO queue as an adaptation of a SinglyLinkedList. */
-public class LinkedQueue<E> implements Queue<E> {
+public class LinkedQueue<E> implements IQueue<E> {
     private SinglyLinkedList<E> list = new SinglyLinkedList<>();    // an empty list
     
     // constructor
