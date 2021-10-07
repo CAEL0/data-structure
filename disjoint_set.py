@@ -14,11 +14,11 @@ n = int(sys.stdin.readline())
 parent = [i for i in range(n + 1)]
 
 
-def union(x: int, y: int) -> None:
+def union(x, y):
     parent[find(x)] = find(y)
 
 
-def find(z: int) -> int:
+def find(z):
     if z != parent[z]:
         parent[z] = find(parent[z])
     return parent[z]
