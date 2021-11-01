@@ -14,7 +14,7 @@ for h in range(height - 1, -1, -1):
         tree[i] = tree[2 * i] + tree[2 * i + 1]
 
 
-def summation(a: int, b: int) -> int:
+def add(a, b):
     res = 0
     queue = [(a, b, 1)]
     while queue:
@@ -48,7 +48,7 @@ def summation(a: int, b: int) -> int:
     return res
 
 
-def update(a: int, b: int, c: int) -> None:
+def update(a, b, c):
     queue = [(a, b, 1)]
     while queue:
         a, b, idx = queue.pop()
