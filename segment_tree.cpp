@@ -14,8 +14,10 @@ ll add(int a, int b) {
     a += powh - 1;
     b += powh - 1;
     while (a <= b) {
-        if (a % 2) res += tree[a++];
-        if (b % 2 == 0) res += tree[b--];
+        if (a % 2)
+            res += tree[a++];
+        if (b % 2 == 0)
+            res += tree[b--];
         a /= 2;
         b /= 2;
     }
@@ -50,7 +52,9 @@ int main() {
     for (int i = 0; i < x + y; i++) {
         ll p, q, r;
         cin >> p >> q >> r;
-        if (p == 1) update(q, r);
-        else cout << add(q, r) << '\n';
+        if (p == 1)
+            update(q, r);
+        else
+            cout << add(q, r) << '\n';
     }
 }
