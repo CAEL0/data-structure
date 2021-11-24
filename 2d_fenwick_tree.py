@@ -36,7 +36,6 @@ for _ in range(m):
     if operation[0]:
         x1, y1, x2, y2 = operation[1:]
         print(summation(x2, y2) - summation(x2, y1 - 1) - summation(x1 - 1, y2) + summation(x1 - 1, y1 - 1))
-
     else:
         x, y, c = operation[1:]
         update(x, y, c - summation(x, y) + summation(x, y - 1) + summation(x - 1, y) - summation(x - 1, y - 1))
