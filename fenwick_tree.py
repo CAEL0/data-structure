@@ -20,5 +20,4 @@ class FenwickTree:
         while idx >= 0:
             res += self.array[idx]
             idx -= idx & ~idx
-        
         return res
