@@ -12,10 +12,11 @@ from math import log2, ceil
 
 n = int(sys.stdin.readline())
 height = ceil(log2(n))
-tree = [0] * 2 ** (height + 1)
+z = 2 ** height
+tree = [0] * 2 * z
 
 for i in range(n):
-    tree[2 ** height + i] = int(sys.stdin.readline())
+    tree[z + i] = int(sys.stdin.readline())
 
 for h in range(height - 1, -1, -1):
     for i in range(2 ** h, 2 ** (h + 1)):
@@ -24,8 +25,8 @@ for h in range(height - 1, -1, -1):
 
 def summation(a, b):
     res = 0
-    a += 2 ** height - 1
-    b += 2 ** height - 1
+    a += z - 1
+    b += z - 1
     while a <= b:
         if a % 2:
             res += tree[a]
@@ -39,7 +40,7 @@ def summation(a, b):
 
 
 def update(k, c):
-    idx = 2 ** height + k - 1
+    idx = z + k - 1
     gap = tree[idx] - c
     while idx >= 1:
         tree[idx] -= gap
