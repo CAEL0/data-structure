@@ -35,7 +35,6 @@ def summation(a, b):
             b -= 1
         a //= 2
         b //= 2
-
     return res
 
 
