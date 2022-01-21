@@ -44,7 +44,6 @@ def summation(a, b):
         else:
             queue.append((a, mid - 1, 2 * idx))
             queue.append((mid, b, 2 * idx + 1))
-
     return res
 
 
